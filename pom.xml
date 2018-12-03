@@ -13,6 +13,9 @@
         <javafaker.version>0.16</javafaker.version>
         <surefire.version>3.0.0-M1</surefire.version>
         <failsafe.version>3.0.0-M1</failsafe.version>
+
+        <unit.includes>*Test.java</unit.includes>
+        <it.includes>*_IT.java</it.includes>
     </properties>
 
 
@@ -33,6 +36,16 @@
         </dependency>
     </dependencies>
 
+    <profiles>
+        <profile>
+            <id>another</id>
+            <properties>
+                <unit.includes>Another*Test.java</unit.includes>
+                <it.includes>Another*_IT.java</it.includes>
+            </properties>
+        </profile>
+    </profiles>
+
     <build>
         <plugins>
             <plugin>
@@ -40,22 +53,23 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${surefire.version}</version>
                 <configuration>
-                    <!--<includes>-->
-                        <!--<include>Another*Test.java</include>-->
-                    <!--</includes>-->
-                    <!--<testFailureIgnore>true</testFailureIgnore>-->
+                    <includes>
+                        <include>${unit.includes}</include>
+                    </includes>
+                    <skipTests>false</skipTests>
+                    <testFailureIgnore>false</testFailureIgnore>
                 </configuration>
             </plugin>
-
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
                 <version>${failsafe.version}</version>
                 <configuration>
-                    <!--<excludes>-->
-                        <!--<exclude>Another*IT.java</exclude>-->
-                    <!--</excludes>-->
-                    <!--<skipTests>true</skipTests>-->
+                    <includes>
+                        <include>${it.includes}</include>
+                    </includes>
+                    <skipTests>false</skipTests>
+                    <testFailureIgnore>true</testFailureIgnore>
                 </configuration>
                 <executions>
                     <execution>
@@ -68,6 +82,4 @@
             </plugin>
         </plugins>
     </build>
-
-
 </project>
