@@ -11,6 +11,8 @@
     <properties>
         <junit.version>4.12</junit.version>
         <javafaker.version>0.16</javafaker.version>
+        <surefire.version>3.0.0-M1</surefire.version>
+        <failsafe.version>3.0.0-M1</failsafe.version>
     </properties>
 
 
@@ -35,8 +37,26 @@
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${surefire.version}</version>
+                <configuration>
+                    <!--<includes>-->
+                        <!--<include>Another*Test.java</include>-->
+                    <!--</includes>-->
+                    <!--<testFailureIgnore>true</testFailureIgnore>-->
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
-                <version>3.0.0-M1</version>
+                <version>${failsafe.version}</version>
+                <configuration>
+                    <!--<excludes>-->
+                        <!--<exclude>Another*IT.java</exclude>-->
+                    <!--</excludes>-->
+                    <!--<skipTests>true</skipTests>-->
+                </configuration>
                 <executions>
                     <execution>
                         <goals>
