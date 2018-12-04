@@ -18,7 +18,6 @@
         <it.includes>*_IT.java</it.includes>
     </properties>
 
-
     <dependencies>
         <!-- https://mvnrepository.com/artifact/com.github.javafaker/javafaker -->
         <dependency>
@@ -54,7 +53,7 @@
                 <version>${surefire.version}</version>
                 <configuration>
                     <includes>
-                        <include>${unit.includes}</include>
+                        <include>System*Test.java</include>
                     </includes>
                     <skipTests>false</skipTests>
                     <testFailureIgnore>false</testFailureIgnore>
@@ -66,10 +65,14 @@
                 <version>${failsafe.version}</version>
                 <configuration>
                     <includes>
-                        <include>${it.includes}</include>
+                        <include>System*IT.java</include>
                     </includes>
                     <skipTests>false</skipTests>
                     <testFailureIgnore>true</testFailureIgnore>
+                    <systemPropertyVariables>
+                        <serviceHost>192.168.1.1</serviceHost>
+                        <servicePort>8080</servicePort>
+                    </systemPropertyVariables>
                 </configuration>
                 <executions>
                     <execution>
