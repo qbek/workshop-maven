@@ -31,12 +31,36 @@ group = 'com.github.qbek'
 version = '1.0-SNAPSHOT'
 sourceCompatibility = '1.8'
 
-test {
-//    testLogging {
-//        showStandardStreams = true
-//    }
 
-//    systemProperty "serviceHost", "12.12.12.12"
-//    systemProperty "serviceHost", System.getProperty("serviceHost", "12.12.12.12")
-//    systemProperties System.getProperties()
+task first {
+  doFirst {
+    println "Do first in first task"
+  }
+
+  doLast {
+    println "Do last in first task"
+  }
+
+  println "First task configuration phase"
 }
+
+//task second (dependsOn:first) {
+//  println 'Second task configuration p'
+//
+//  doLast {
+//    println "I'm last"
+//  }
+//}
+//
+//task third (type: Delete) {
+//  doFirst {
+//    println "before delete"
+//    ant.input("press something:")
+//  }
+//
+//  doLast {
+//    println "after delete"
+//  }
+//
+//  delete 'delete.me'
+//}
